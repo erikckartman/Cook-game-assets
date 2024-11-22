@@ -109,9 +109,8 @@ public class Customer : MonoBehaviour
                 targetTable.isOccupied = false;
                 isDone = true;
                 targetTable = null;
-                int rateByClient = Random.Range(3, 5);
-                rating.rate = (rating.rate + rateByClient) / 2;
-                rating.rateCanvas.text = $"Rating: {rating.rate}";
+                int rateByClient = Random.Range(4, 5);
+                rating.GetTotalRate(rateByClient);
             }
             else
             {
@@ -119,8 +118,8 @@ public class Customer : MonoBehaviour
                 targetTable.isOccupied = false;
                 isDone = true;
                 targetTable = null;
-                rating.rate = rating.rate / 2;
-                rating.rateCanvas.text = $"Rating: {rating.rate}";
+                rating.rates.Add(0);
+                rating.GetTotalRate(0);
             }
         }
         else if(order != null && targetTable.dish == null && waiting > waitingTime)
@@ -129,8 +128,7 @@ public class Customer : MonoBehaviour
             targetTable.isOccupied = false;
             isDone = true;
             targetTable = null;
-            rating.rate = rating.rate / 2;
-            rating.rateCanvas.text = $"Rating: {rating.rate}";
+            rating.GetTotalRate(0);
         }
     }
 

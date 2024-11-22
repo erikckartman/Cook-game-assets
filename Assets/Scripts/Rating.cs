@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,5 +7,20 @@ using UnityEngine;
 public class Rating : MonoBehaviour
 {
     public TextMeshProUGUI rateCanvas;
-    [HideInInspector] public int rate = 0;
+    public List<int> rates;
+
+    public void GetTotalRate(int x)
+    {
+        rates.Add(x);
+        int sum = 0;
+        foreach (int number in rates)
+        {
+            sum += number;
+        }
+
+        double average = (double)sum / rates.Count;
+        double roundedAverage = Math.Round(average, 1);
+
+        rateCanvas.text = $"Rating: {roundedAverage}";
+    }
 }
