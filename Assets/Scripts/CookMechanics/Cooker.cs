@@ -19,6 +19,7 @@ public class Recipe
     public string dishName;
     public List<IngredientRequirement> ingredients; 
     public GameObject dishPrefab;
+    public double price;
 }
 
 public class Cooker : MonoBehaviour
@@ -75,5 +76,19 @@ public class Cooker : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    public double GetPriceForDish(string dishName)
+    {
+        foreach (Recipe recipe in recipes)
+        {
+            if (recipe.dishName == dishName)
+            {
+                return recipe.price;
+            }
+        }
+
+        Debug.LogWarning($"Recipe {dishName} wasn't found!");
+        return 0;
     }
 }

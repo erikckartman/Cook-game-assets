@@ -20,6 +20,7 @@ public class Customer : MonoBehaviour
 
     private Cooker cooker;
     private Rating rating;
+    private MoneySystem moneySystem;
 
     private Table targetTable;
     private bool isMoving = false;
@@ -36,6 +37,7 @@ public class Customer : MonoBehaviour
 
         cooker = FindObjectOfType<Cooker>();
         rating = FindObjectOfType<Rating>();
+        moneySystem = FindObjectOfType<MoneySystem>();
     }
 
     private void Update()
@@ -82,7 +84,6 @@ public class Customer : MonoBehaviour
         if (Vector3.Distance(transform.position, targetTable.transform.position) <= arrivalDistance)
         {
             isMoving = false;
-            Debug.Log("Клієнт прибув за столик!");
             MakeOrder();
         }
     }
@@ -111,6 +112,7 @@ public class Customer : MonoBehaviour
                 targetTable = null;
                 int rateByClient = Random.Range(4, 5);
                 rating.GetTotalRate(rateByClient);
+                moneySystem.EarnMoney(cooker.GetPriceForDish(order));
             }
             else
             {

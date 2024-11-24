@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Rating : MonoBehaviour
 {
-    public TextMeshProUGUI rateCanvas;
-    public List<int> rates;
+    [SerializeField] private TextMeshProUGUI rateCanvas;
+    [HideInInspector] public List<int> rates;
 
     public void GetTotalRate(int x)
     {
